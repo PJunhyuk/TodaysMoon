@@ -1,5 +1,6 @@
 package pjunhyuk.todaysmoon;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -26,6 +27,9 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        // For SplashActivity
+        startActivity(new Intent(this, SplashActivity.class));
     }
 
     @Override
@@ -49,4 +53,5 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 }
