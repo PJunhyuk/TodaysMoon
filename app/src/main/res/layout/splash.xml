@@ -4,11 +4,10 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:src="@drawable/splash_sample"
-        android:scaleType="fitXY"
-
-         />
+        android:src="@drawable/moon_full_yellow"
+        android:contentDescription="@string/app_name"
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

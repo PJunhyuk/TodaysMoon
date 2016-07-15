@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // For SplashActivity
-//        startActivity(new Intent(this, SplashActivity.class));
+        startActivity(new Intent(this, SplashActivity.class));
 
         // For Setting
         imgbutton = (ImageButton)findViewById(R.id.button_setting);
