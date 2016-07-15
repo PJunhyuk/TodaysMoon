@@ -9,6 +9,6 @@
         android:src="@drawable/splash_sample"
         android:scaleType="fitXY"
 
-        />
+         />
 
 </LinearLayout>

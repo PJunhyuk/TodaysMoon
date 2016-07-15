@@ -22,9 +22,11 @@
         <activity android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden"
-            android:theme="@android:style/Theme.NoTitleBar" />
+            android:theme="@android:style/Theme.NoTitleBar" >
+        </activity>
 
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".SettingActivity" >
+        </activity>
 
     </application>
 

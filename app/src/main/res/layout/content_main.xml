@@ -31,4 +31,13 @@
         android:layout_below="@+id/button_setting"
         android:layout_centerHorizontal="true" />
 
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="30dp"
+        android:id="@+id/cloud_1"
+        android:background="@drawable/cloud"
+        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView" />
+
 </RelativeLayout>
