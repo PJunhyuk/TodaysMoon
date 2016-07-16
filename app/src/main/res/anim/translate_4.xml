@@ -6,7 +6,7 @@
     android:fillAfter="true"
     android:fromXDelta="0%p"
     android:fromYDelta="0%p"
-    android:toXDelta="-5%p"
+    android:toXDelta="5%p"
     android:toYDelta="0%p"
     >
 

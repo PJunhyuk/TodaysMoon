@@ -75,4 +75,63 @@
         android:layout_marginRight="21dp"
         android:layout_marginEnd="21dp" />
 
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/star_1"
+        android:background="@drawable/star_yellow"
+        android:layout_below="@+id/star_2"
+        android:layout_alignLeft="@+id/cloud_2"
+        android:layout_alignStart="@+id/cloud_2" />
+
+    <ImageView
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        android:id="@+id/star_2"
+        android:background="@drawable/star_yellow"
+        android:layout_below="@+id/cloud_3"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp" />
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:id="@+id/star_3"
+        android:background="@drawable/star_yellow"
+        android:layout_below="@+id/star_2"
+        android:layout_toRightOf="@+id/star_2"
+        android:layout_toEndOf="@+id/star_2"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp" />
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:id="@+id/star_4"
+        android:background="@drawable/star_yellow"
+        android:layout_marginTop="30dp"
+        android:layout_alignTop="@+id/cloud_1"
+        android:layout_toLeftOf="@+id/star_3"
+        android:layout_toStartOf="@+id/star_3" />
+
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:id="@+id/star_5"
+        android:background="@drawable/star_yellow"
+        android:layout_alignTop="@+id/cloud_3"
+        android:layout_toLeftOf="@+id/cloud_4"
+        android:layout_toStartOf="@+id/cloud_4" />
+
+    <ImageView
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:id="@+id/star_6"
+        android:background="@drawable/star_yellow"
+        android:layout_above="@+id/cloud_4"
+        android:layout_alignLeft="@+id/cloud_1"
+        android:layout_alignStart="@+id/cloud_1" />
+
 </RelativeLayout>

@@ -15,6 +15,11 @@ public class MainActivity extends AppCompatActivity {
     ImageView cloud_2;
     ImageView cloud_3;
     ImageView cloud_4;
+    ImageView star_1;
+    ImageView star_2;
+    ImageView star_3;
+    ImageView star_4;
+    ImageView star_5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,5 +52,13 @@ public class MainActivity extends AppCompatActivity {
         cloud_4 = (ImageView) findViewById(R.id.cloud_4);
         final Animation animPatrol4 = AnimationUtils.loadAnimation(this, R.anim.translate_3);
         cloud_4.startAnimation(animPatrol4);
+
+        // For star twinkle
+        star_1 = (ImageView) findViewById(R.id.star_1);
+        final Animation animTwinkle1 = AnimationUtils.loadAnimation(this, R.anim.twinkle_1);
+        star_1.startAnimation(animTwinkle1);
+        star_2 = (ImageView) findViewById(R.id.star_2);
+        final Animation animTwinkle2 = AnimationUtils.loadAnimation(this, R.anim.twinkle_1);
+        star_2.startAnimation(animTwinkle2);
     }
 }
