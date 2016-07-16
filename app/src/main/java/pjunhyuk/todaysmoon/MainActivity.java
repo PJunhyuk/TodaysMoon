@@ -12,6 +12,9 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
     ImageButton imgbutton;
     ImageView cloud_1;
+    ImageView cloud_2;
+    ImageView cloud_3;
+    ImageView cloud_4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,16 @@ public class MainActivity extends AppCompatActivity {
 
         // For cloud patrol
         cloud_1 = (ImageView) findViewById(R.id.cloud_1);
-        final Animation animPatrol = AnimationUtils.loadAnimation(this, R.anim.translate);
-        cloud_1.startAnimation(animPatrol);
+        final Animation animPatrol1 = AnimationUtils.loadAnimation(this, R.anim.translate_1);
+        cloud_1.startAnimation(animPatrol1);
+        cloud_2 = (ImageView) findViewById(R.id.cloud_2);
+        final Animation animPatrol2 = AnimationUtils.loadAnimation(this, R.anim.translate_2);
+        cloud_2.startAnimation(animPatrol2);
+        cloud_3 = (ImageView) findViewById(R.id.cloud_3);
+        final Animation animPatrol3 = AnimationUtils.loadAnimation(this, R.anim.translate_3);
+        cloud_3.startAnimation(animPatrol3);
+        cloud_4 = (ImageView) findViewById(R.id.cloud_4);
+        final Animation animPatrol4 = AnimationUtils.loadAnimation(this, R.anim.translate_3);
+        cloud_4.startAnimation(animPatrol4);
     }
 }
