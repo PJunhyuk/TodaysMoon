@@ -13,31 +13,33 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+// For GPS Permission - use TedPermission
+// Reference : http://gun0912.tistory.com/55#_
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
 import java.util.ArrayList;
 
 public class MainActivity extends Activity {
-    // For Permission
+    // For GPS Permission - Make PermissionListener
     PermissionListener permissionlistener = new PermissionListener() {
         @Override
         public void onPermissionGranted() {
             Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
         }
-
         @Override
         public void onPermissionDenied(ArrayList<String> deniedPermissions) {
             Toast.makeText(MainActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
         }
     };
 
-    // For GPS
+    // For GPSInfo
     private Button btnShowLocation;
     private TextView txtLat;
     private TextView txtLon;
     private GpsInfo gps;
 
+    // Buttons
     ImageButton imgbutton;
     ImageView cloud_1;
     ImageView cloud_2;
@@ -54,6 +56,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // For GPS Permission - Start TedPermission
         new TedPermission(this)
                 .setPermissionListener(permissionlistener)
                 .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
@@ -95,26 +98,29 @@ public class MainActivity extends Activity {
         final Animation animTwinkle2 = AnimationUtils.loadAnimation(this, R.anim.twinkle_1);
         star_2.startAnimation(animTwinkle2);
 
-        // For GPS
+        // Start for GPSInfo
         btnShowLocation = (Button)findViewById(R.id.btn_start);
         txtLat = (TextView)findViewById(R.id.Latitude);
         txtLon = (TextView)findViewById(R.id.Longitude);
 
+        // GPS 정보를 보여주기 위한 이벤트 클래스 등록
         btnShowLocation.setOnClickListener(new View.OnClickListener() {
             public void onClick(View arg0) {
                 gps = new GpsInfo(MainActivity.this);
+
+                // GPS 사용여부 가져오기
                 if(gps.isGetLocation()) {
                     double latitude = gps.getLatitude();
                     double longitude = gps.getLongitude();
-
                     txtLat.setText(String.valueOf(latitude));
                     txtLon.setText(String.valueOf(longitude));
-
                     Toast.makeText(getApplicationContext(), "당신의 위치 - \n위도: " + latitude + "\n경도: " + longitude, Toast.LENGTH_LONG).show();
                 } else {
+                    // GPS를 사용할 수 없으므로
                     gps.showSettingsAlert();
                 }
             }
         });
+        // End for GPSInfo
     }
 }

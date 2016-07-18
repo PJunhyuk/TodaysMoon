@@ -1,40 +1,43 @@
 package pjunhyuk.todaysmoon;
 
-import android.Manifest;
+// Reference: http://mainia.tistory.com/1153
+
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.provider.Settings;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 
 /**
  * Created by YonseiSIT15_PJH_DT on 2016-07-19.
  */
+
 public class GpsInfo extends Service implements LocationListener {
     private final Context mContext;
 
+    // GPS 사용여부
     boolean isGPSEnabled = false;
 
+    // 네트워크 사용여부
     boolean isNetworkEnabled = false;
 
+    // GPS 상태값
     boolean isGetLocation = false;
 
     Location location;
-    double lat;
-    double lon;
+    double lat; // 위도
+    double lon; // 경도
 
+    // 최소 GPS 정보 업데이트 거리 : 10미터
     private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10;
 
+    // 최소 GPS 정보 업데이트 시간 : 1분 (단위 : ms)
     private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1;
 
     protected LocationManager locationManager;
@@ -48,18 +51,23 @@ public class GpsInfo extends Service implements LocationListener {
         try {
             locationManager = (LocationManager) mContext.getSystemService(LOCATION_SERVICE);
 
+            // GPS 정보 가져오기
             isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
+            // 현재 네트워크 상태 값 알아오기
             isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
             if(!isGPSEnabled && !isNetworkEnabled) {
+                // GPS와 네트워크 사용이 가능하지 않을 때 소스
             } else {
                 this.isGetLocation = true;
+                // 네트워크 정보로부터 위치값 가져오기
                 if(isNetworkEnabled) {
                     locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, MIN_TIME_BW_UPDATES, MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
                     if(locationManager != null) {
                         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
                         if(location != null) {
+                            // 위도 경도 저장
                             lat = location.getLatitude();
                             lon = location.getLongitude();
                         }
@@ -85,12 +93,14 @@ public class GpsInfo extends Service implements LocationListener {
         return location;
     }
 
+    // GPS 종료
     public void stopUsingGPS() {
         if(locationManager != null) {
             locationManager.removeUpdates(GpsInfo.this);
         }
     }
 
+    // 위도값 가져오기
     public double getLatitude() {
         if(location != null) {
             lat = location.getLatitude();
@@ -98,6 +108,7 @@ public class GpsInfo extends Service implements LocationListener {
         return lat;
     }
 
+    // 경도값 가져오기
     public double getLongitude() {
         if(location != null) {
             lon = location.getLongitude();
@@ -105,22 +116,27 @@ public class GpsInfo extends Service implements LocationListener {
         return lon;
     }
 
+    // GPS나 wifi 정보가 켜져있는지 확인
     public boolean isGetLocation() {
         return this.isGetLocation;
     }
 
+    // GPS 정보를 가져오지 못했을 때 설정값으로 갈지 물어보는 alert 창
     public void showSettingsAlert() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
 
         alertDialog.setTitle("GPS 사용유무셋팅");
         alertDialog.setMessage("GPS 셋팅이 되지 않았을수도 있습니다. \n 설정창으로 가시겠습니까?");
 
+        // OK 누르면 설정창으로 이동
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
                 mContext.startActivity(intent);
             }
         });
+
+        // Cancle 하면 종료
         alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
@@ -135,21 +151,22 @@ public class GpsInfo extends Service implements LocationListener {
     }
 
     public void onLocationChanged(Location location) {
+        // TODO Auto-generated method stub
 
     }
 
     public void onStatusChanged(String provider, int status, Bundle extras) {
+        // TODO Auto-generated method stub
 
     }
 
     public void onProviderEnabled(String provider) {
+        // TODO Auto-generated method stub
 
     }
 
     public void onProviderDisabled(String provider) {
+        // TODO Auto-generated method stub
 
     }
-
 }
-
-

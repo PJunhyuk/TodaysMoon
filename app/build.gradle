@@ -24,9 +24,11 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:design:23.4.0'
+    // for GPS Permission - using TedPermission
     compile 'com.github.ParkSangGwon:TedPermission:v1.0.12'
 }
 
+// using jitpack
 repositories {
     maven { url "https://jitpack.io" }
 }
