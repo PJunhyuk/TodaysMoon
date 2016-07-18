@@ -1,15 +1,43 @@
 package pjunhyuk.todaysmoon;
 
+import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+import com.gun0912.tedpermission.PermissionListener;
+import com.gun0912.tedpermission.TedPermission;
+
+import java.util.ArrayList;
+
+public class MainActivity extends Activity {
+    // For Permission
+    PermissionListener permissionlistener = new PermissionListener() {
+        @Override
+        public void onPermissionGranted() {
+            Toast.makeText(MainActivity.this, "Permission Granted", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onPermissionDenied(ArrayList<String> deniedPermissions) {
+            Toast.makeText(MainActivity.this, "Permission Denied\n" + deniedPermissions.toString(), Toast.LENGTH_SHORT).show();
+        }
+    };
+
+    // For GPS
+    private Button btnShowLocation;
+    private TextView txtLat;
+    private TextView txtLon;
+    private GpsInfo gps;
+
     ImageButton imgbutton;
     ImageView cloud_1;
     ImageView cloud_2;
@@ -26,11 +54,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        new TedPermission(this)
+                .setPermissionListener(permissionlistener)
+                .setDeniedMessage("If you reject permission,you can not use this service\n\nPlease turn on permissions at [Setting] > [Permission]")
+                .setPermissions(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION)
+                .check();
+
         // For SplashActivity
         startActivity(new Intent(this, SplashActivity.class));
 
         // For Setting
-        imgbutton = (ImageButton)findViewById(R.id.button_setting);
+        imgbutton = (ImageButton) findViewById(R.id.button_setting);
         imgbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,5 +94,27 @@ public class MainActivity extends AppCompatActivity {
         star_2 = (ImageView) findViewById(R.id.star_2);
         final Animation animTwinkle2 = AnimationUtils.loadAnimation(this, R.anim.twinkle_1);
         star_2.startAnimation(animTwinkle2);
+
+        // For GPS
+        btnShowLocation = (Button)findViewById(R.id.btn_start);
+        txtLat = (TextView)findViewById(R.id.Latitude);
+        txtLon = (TextView)findViewById(R.id.Longitude);
+
+        btnShowLocation.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View arg0) {
+                gps = new GpsInfo(MainActivity.this);
+                if(gps.isGetLocation()) {
+                    double latitude = gps.getLatitude();
+                    double longitude = gps.getLongitude();
+
+                    txtLat.setText(String.valueOf(latitude));
+                    txtLon.setText(String.valueOf(longitude));
+
+                    Toast.makeText(getApplicationContext(), "당신의 위치 - \n위도: " + latitude + "\n경도: " + longitude, Toast.LENGTH_LONG).show();
+                } else {
+                    gps.showSettingsAlert();
+                }
+            }
+        });
     }
 }
