@@ -19,7 +19,9 @@ import android.widget.Toast;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
-// For live weather
+// For live weather information on location - using openweathermap api
+// Reference : http://bcho.tistory.com/1050
+
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -59,6 +61,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // For live weather information on location
         setContentView(R.layout.content_main);
 
         // For GPS Permission - Start TedPermission
@@ -129,6 +132,7 @@ public class MainActivity extends Activity {
         // End for GPSInfo
     }
 
+    // For live weather information on location
     public void getWeather(View view) {
         EditText tvLon = (EditText)findViewById(R.id.lon);
         String strLon = tvLon.getText().toString();
@@ -138,6 +142,7 @@ public class MainActivity extends Activity {
         String strLat = tvLat.getText().toString();
         int lat = Integer.parseInt(strLat);
 
+        // 날씨를 읽어오는 API 호출
         OpenWeatherAPITask t = new OpenWeatherAPITask();
         try {
             Weather w = t.execute(lon,lat).get();

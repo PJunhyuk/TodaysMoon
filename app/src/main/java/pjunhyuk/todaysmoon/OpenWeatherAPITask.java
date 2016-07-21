@@ -12,6 +12,7 @@ public class OpenWeatherAPITask extends AsyncTask<Integer, Void, Weather> {
 
         int lat = params[0];
         int lon = params[1];
+        // API 호출
         Weather w = client.getWeather(lat, lon);
 
         return w;
