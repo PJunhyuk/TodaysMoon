@@ -137,7 +137,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="현재 위치 정보"
+        android:text="live-LOCATION"
         android:id="@+id/btn_start"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -148,7 +148,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/Latitude"
-        android:layout_below="@+id/button"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -158,6 +158,65 @@
         android:text="New Text"
         android:id="@+id/Longitude"
         android:layout_below="@+id/Latitude"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="longtitude"
+        android:id="@+id/tvLongtitude"
+        android:layout_alignBottom="@+id/lat"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="latitude"
+        android:id="@+id/tvLatitude"
+        android:layout_above="@+id/lat"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lat"
+        android:width="100dp"
+        android:layout_above="@+id/getWeatherBtn"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_marginBottom="22dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/lon"
+        android:width="100dp"
+        android:layout_alignBottom="@+id/tvLatitude"
+        android:layout_alignLeft="@+id/lat"
+        android:layout_alignStart="@+id/lat" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="getWeather"
+        android:id="@+id/getWeatherBtn"
+        android:onClick="getWeather"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Temperature"
+        android:id="@+id/tem"
+        android:layout_above="@+id/lon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

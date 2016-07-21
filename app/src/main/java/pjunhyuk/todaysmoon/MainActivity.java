@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +19,10 @@ import android.widget.Toast;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
+// For live weather
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity {
     // For GPS Permission - Make PermissionListener
@@ -55,6 +59,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        setContentView(R.layout.content_main);
 
         // For GPS Permission - Start TedPermission
         new TedPermission(this)
@@ -123,4 +128,31 @@ public class MainActivity extends Activity {
         });
         // End for GPSInfo
     }
+
+    public void getWeather(View view) {
+        EditText tvLon = (EditText)findViewById(R.id.lon);
+        String strLon = tvLon.getText().toString();
+        int lon = Integer.parseInt(strLon);
+
+        EditText tvLat = (EditText)findViewById(R.id.lat);
+        String strLat = tvLat.getText().toString();
+        int lat = Integer.parseInt(strLat);
+
+        OpenWeatherAPITask t = new OpenWeatherAPITask();
+        try {
+            Weather w = t.execute(lon,lat).get();
+            System.out.println("Temp : " + w.getTemperature());
+
+            TextView tem = (TextView)findViewById(R.id.tem);
+            String temperature = String.valueOf(w.getTemperature());
+
+            tem.setText(temperature);
+
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        } catch(ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
