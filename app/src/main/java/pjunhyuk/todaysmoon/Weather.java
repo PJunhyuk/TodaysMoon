@@ -4,17 +4,17 @@ package pjunhyuk.todaysmoon;
  * Created by YonseiSIT15_PJH_DT on 2016-07-21.
  */
 public class Weather {
-    int lat;
-    int lon;
+    double lat;
+    double lon;
     int temperature;
     int cloudy;
     String weathermain;
     String city;
 
-    public void setLat(int lat) {
+    public void setLat(double lat) {
         this.lat = lat;
     }
-    public void setIon(int lon) {
+    public void setIon(double lon) {
         this.lon = lon;
     }
     public void setTemperature(int t) {
@@ -28,10 +28,10 @@ public class Weather {
         this.city = city;
     }
 
-    public int getLat() {
+    public double getLat() {
         return lat;
     }
-    public int getIon() {
+    public double getIon() {
         return lon;
     }
     public int getTemperature() {

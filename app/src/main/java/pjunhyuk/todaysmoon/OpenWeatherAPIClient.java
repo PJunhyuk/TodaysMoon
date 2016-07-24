@@ -17,7 +17,7 @@ import java.net.URL;
  */
 public class OpenWeatherAPIClient {
     final static String openWeatherURL = "http://api.openweathermap.org/data/2.5/weather";
-    public Weather getWeather(int lat, int lon) {
+    public Weather getWeather(double lat, double lon) {
         Weather w = new Weather();
         String urlString = openWeatherURL + "?lat=" + lat + "&lon=" + lon + "&APPID=2ee956233991ef8497dad31a0fb410e1";
 

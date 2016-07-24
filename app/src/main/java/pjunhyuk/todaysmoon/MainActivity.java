@@ -157,10 +157,10 @@ public class MainActivity extends Activity {
             new Button.OnClickListener() {
                 public void onClick(View v) {
                     String strLon = tvLon.getText().toString();
-                    int lon = Integer.parseInt(strLon);
+                    double lon = Double.valueOf(strLon).doubleValue();
 
                     String strLat = tvLat.getText().toString();
-                    int lat = Integer.parseInt(strLat);
+                    double lat = Double.valueOf(strLat).doubleValue();
 
                     // 날씨를 읽어오는 API 호출
                     OpenWeatherAPITask t = new OpenWeatherAPITask();
