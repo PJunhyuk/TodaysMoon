@@ -21,7 +21,11 @@ import com.gun0912.tedpermission.TedPermission;
 // For live weather information on location - using openweathermap api
 // Reference : http://bcho.tistory.com/1050
 
-import org.w3c.dom.Text;
+// For LunarToSolarTest
+// Reference : http://bugnote.tistory.com/31
+
+// For live time
+// Reference : http://blog.opid.kr/247
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -86,9 +90,36 @@ public class MainActivity extends Activity {
         // For live time
         textlivetime = (TextView)findViewById(R.id.livetime);
         long now = System.currentTimeMillis();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", java.util.Locale.getDefault());
         Date date = new Date(now);
-        textlivetime.setText(dateFormat.format(date));
+        String strdate = dateFormat.format(date);
+        String moondate = LunarToSolarTest.convertSolarToLunar(strdate);
+
+        // For Moon
+        imgmoon = (ImageView)findViewById(R.id.moon);
+        imgmoon.setBackgroundResource(R.drawable.moon_1_1);
+        int Lunarday = Integer.parseInt(moondate.substring(8, 10));
+        if(Lunarday == 1) {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_1);
+        }else if(Lunarday >=2 && Lunarday <= 6) {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_2);
+        }else if(Lunarday >=7 && Lunarday <= 10) {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_3);
+        }else if(Lunarday >= 11 && Lunarday <= 14) {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_4);
+        }else if(Lunarday == 15) {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_5);
+        }else if(Lunarday >= 16 && Lunarday <= 19) {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_6);
+        }else if(Lunarday >= 20 && Lunarday <= 23) {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_7);
+        }else if(Lunarday >= 24 && Lunarday <= 28) {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_8);
+        }else {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_9);
+        }
+
+        textlivetime.setText(Integer.toString(Lunarday));
 
         // For Setting
         imgbutton = (ImageButton) findViewById(R.id.button_setting);
@@ -99,10 +130,6 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
-
-        // For Moon
-        imgmoon = (ImageView)findViewById(R.id.moon);
-        imgmoon.setBackgroundResource(R.drawable.moon_1_1);
 
         // For cloud patrol
         cloud_1 = (ImageView) findViewById(R.id.cloud_1);
