@@ -8,6 +8,7 @@ public class Weather {
     int lon;
     int temperature;
     int cloudy;
+    String weathermain;
     String city;
 
     public void setLat(int lat) {
@@ -22,6 +23,7 @@ public class Weather {
     public void setCloudy(int cloudy) {
         this.cloudy = cloudy;
     }
+    public void setWeathermain(String wm) { this.weathermain = wm; }
     public void setCity(String city) {
         this.city = city;
     }
@@ -38,6 +40,7 @@ public class Weather {
     public int getCloudy() {
         return cloudy;
     }
+    public String getWeathermain() { return weathermain; }
     public String getCity() {
         return city;
     }

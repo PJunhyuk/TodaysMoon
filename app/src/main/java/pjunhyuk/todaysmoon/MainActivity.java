@@ -66,6 +66,8 @@ public class MainActivity extends Activity {
     EditText tvLon;
     Button getWeatherBtn;
     TextView tem;
+    TextView weather_main;
+    TextView textcity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +150,8 @@ public class MainActivity extends Activity {
         tvLon = (EditText)findViewById(R.id.lon);
         getWeatherBtn = (Button)findViewById(R.id.getWeatherBtn);
         tem = (TextView)findViewById(R.id.tem);
+        weather_main = (TextView)findViewById(R.id.weather_main);
+        textcity = (TextView)findViewById(R.id.city);
 
         getWeatherBtn.setOnClickListener(
             new Button.OnClickListener() {
@@ -163,10 +167,14 @@ public class MainActivity extends Activity {
                     try {
                         Weather w = t.execute(lon,lat).get();
 
-                        TextView tem = (TextView)findViewById(R.id.tem);
                         String temperature = String.valueOf(w.getTemperature());
-
                         tem.setText(temperature);
+
+                        String weathermain = String.valueOf(w.getWeathermain());
+                        weather_main.setText(weathermain);
+
+                        String city = String.valueOf(w.getCity());
+                        textcity.setText(city);
 
                     } catch(InterruptedException e) {
                         e.printStackTrace();

@@ -50,8 +50,14 @@ public class OpenWeatherAPIClient {
 
     private Weather parseJSON(JSONObject json) throws JSONException {
         Weather w = new Weather();
+        // Get main - temp
         w.setTemperature(json.getJSONObject("main").getInt("temp"));
+
+        // Get city
         w.setCity(json.getString("name"));
+
+        // Get weather - main
+        w.setWeathermain(json.getJSONArray("weather").getJSONObject(0).getString("main"));
 
         return w;
     }
