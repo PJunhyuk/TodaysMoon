@@ -117,46 +117,84 @@ public class MainActivity extends Activity {
         weather_main = (TextView)findViewById(R.id.weather_main);
         textcity = (TextView)findViewById(R.id.city);
 
-        getWeatherBtn.setOnClickListener(
-            new Button.OnClickListener() {
-                public void onClick(View v) {
-                    // GPS 정보를 보여주기 위한 이벤트 클래스 등록
-                    gps = new GpsInfo(MainActivity.this);
-                    // GPS 사용여부 가져오기
-                    if(gps.isGetLocation()) {
-                        double latitude = gps.getLatitude();
-                        double longitude = gps.getLongitude();
-                        txtLat.setText(String.valueOf(latitude));
-                        txtLon.setText(String.valueOf(longitude));
+        getWeatherBtn.setOnClickListener(mClickListener);
 
-                        // 날씨를 읽어오는 API 호출
-                        OpenWeatherAPITask t = new OpenWeatherAPITask();
-                        try {
-                            Weather w = t.execute(latitude,longitude).get();
+        // same as mClickListener - for auto run : start
+        // GPS 정보를 보여주기 위한 이벤트 클래스 등록
+        gps = new GpsInfo(MainActivity.this);
+        // GPS 사용여부 가져오기
+        if(gps.isGetLocation()) {
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+            txtLat.setText(String.valueOf(latitude));
+            txtLon.setText(String.valueOf(longitude));
 
-                            // temperature
-                            String temperature = String.valueOf( Math.round(w.getTemperature()-273.15) );
-                            tem.setText(temperature);
+            // 날씨를 읽어오는 API 호출
+            OpenWeatherAPITask t = new OpenWeatherAPITask();
+            try {
+                Weather w = t.execute(latitude,longitude).get();
 
-                            // weather
-                            String weathermain = String.valueOf(w.getWeathermain());
-                            weather_main.setText(weathermain);
+                // temperature
+                String temperature = String.valueOf( Math.round(w.getTemperature()-273.15) );
+                tem.setText(temperature);
 
-                            // city name
-                            String city = String.valueOf(w.getCity());
-                            textcity.setText(city);
+                // weather
+                String weathermain = String.valueOf(w.getWeathermain());
+                weather_main.setText(weathermain);
 
-                        } catch(InterruptedException e) {
-                            e.printStackTrace();
-                        } catch(ExecutionException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        // GPS를 사용할 수 없으므로
-                        gps.showSettingsAlert();
-                    }
-                }
+                // city name
+                String city = String.valueOf(w.getCity());
+                textcity.setText(city);
+
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            } catch(ExecutionException e) {
+                e.printStackTrace();
             }
-        );
+        } else {
+            // GPS를 사용할 수 없으므로
+            gps.showSettingsAlert();
+        }
+        // same as mClickListener - for auto run : end
     }
+
+    Button.OnClickListener mClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            // GPS 정보를 보여주기 위한 이벤트 클래스 등록
+            gps = new GpsInfo(MainActivity.this);
+            // GPS 사용여부 가져오기
+            if(gps.isGetLocation()) {
+                double latitude = gps.getLatitude();
+                double longitude = gps.getLongitude();
+                txtLat.setText(String.valueOf(latitude));
+                txtLon.setText(String.valueOf(longitude));
+
+                // 날씨를 읽어오는 API 호출
+                OpenWeatherAPITask t = new OpenWeatherAPITask();
+                try {
+                    Weather w = t.execute(latitude,longitude).get();
+
+                    // temperature
+                    String temperature = String.valueOf( Math.round(w.getTemperature()-273.15) );
+                    tem.setText(temperature);
+
+                    // weather
+                    String weathermain = String.valueOf(w.getWeathermain());
+                    weather_main.setText(weathermain);
+
+                    // city name
+                    String city = String.valueOf(w.getCity());
+                    textcity.setText(city);
+
+                } catch(InterruptedException e) {
+                    e.printStackTrace();
+                } catch(ExecutionException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                // GPS를 사용할 수 없으므로
+                gps.showSettingsAlert();
+            }
+        }
+    };
 }
