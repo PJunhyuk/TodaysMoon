@@ -25,7 +25,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:id="@+id/imageView"
+        android:id="@+id/moon"
         android:background="@drawable/moon_full_yellow"
         android:layout_marginTop="58dp"
         android:layout_below="@+id/button_setting"
@@ -37,16 +37,16 @@
         android:id="@+id/cloud_2"
         android:background="@drawable/cloud"
         android:layout_marginBottom="15dp"
-        android:layout_alignBottom="@+id/imageView"
-        android:layout_toLeftOf="@+id/imageView"
-        android:layout_toStartOf="@+id/imageView" />
+        android:layout_alignBottom="@+id/moon"
+        android:layout_toLeftOf="@+id/moon"
+        android:layout_toStartOf="@+id/moon" />
 
     <ImageView
         android:layout_width="70dp"
         android:layout_height="40dp"
         android:id="@+id/cloud_1"
         android:background="@drawable/cloud"
-        android:layout_alignBottom="@+id/imageView"
+        android:layout_alignBottom="@+id/moon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="65dp"
@@ -90,8 +90,8 @@
         android:id="@+id/star_2"
         android:background="@drawable/star_yellow"
         android:layout_below="@+id/cloud_3"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView"
+        android:layout_toRightOf="@+id/moon"
+        android:layout_toEndOf="@+id/moon"
         android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp" />
 
@@ -169,7 +169,7 @@
         android:textColor="#ffffff"
         android:id="@+id/tem"
         android:layout_marginTop="89dp"
-        android:layout_below="@+id/imageView"
+        android:layout_below="@+id/moon"
         android:layout_toRightOf="@+id/getWeatherBtn"
         android:layout_toEndOf="@+id/getWeatherBtn" />
 

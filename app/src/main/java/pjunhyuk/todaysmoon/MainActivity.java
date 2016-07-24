@@ -53,6 +53,7 @@ public class MainActivity extends Activity {
     ImageView star_3;
     ImageView star_4;
     ImageView star_5;
+    ImageView imgmoon;
 
     // For Live Weather
     Button getWeatherBtn;
@@ -84,6 +85,10 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         });
+
+        // For Moon
+        imgmoon = (ImageView)findViewById(R.id.moon);
+        imgmoon.setBackgroundResource(R.drawable.moon_1_1);
 
         // For cloud patrol
         cloud_1 = (ImageView) findViewById(R.id.cloud_1);
