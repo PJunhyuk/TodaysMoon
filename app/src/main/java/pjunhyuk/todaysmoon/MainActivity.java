@@ -128,22 +128,21 @@ public class MainActivity extends Activity {
                         double longitude = gps.getLongitude();
                         txtLat.setText(String.valueOf(latitude));
                         txtLon.setText(String.valueOf(longitude));
-//                        Toast.makeText(getApplicationContext(), "당신의 위치 - \n위도: " + latitude + "\n경도: " + longitude, Toast.LENGTH_LONG).show();
-
-                        double lon = latitude;
-                        double lat = longitude;
 
                         // 날씨를 읽어오는 API 호출
                         OpenWeatherAPITask t = new OpenWeatherAPITask();
                         try {
-                            Weather w = t.execute(lon,lat).get();
+                            Weather w = t.execute(latitude,longitude).get();
 
-                            String temperature = String.valueOf(w.getTemperature());
+                            // temperature
+                            String temperature = String.valueOf( Math.round(w.getTemperature()-273.15) );
                             tem.setText(temperature);
 
+                            // weather
                             String weathermain = String.valueOf(w.getWeathermain());
                             weather_main.setText(weathermain);
 
+                            // city name
                             String city = String.valueOf(w.getCity());
                             textcity.setText(city);
 
