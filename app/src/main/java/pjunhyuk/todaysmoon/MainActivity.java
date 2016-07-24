@@ -23,6 +23,8 @@ import com.gun0912.tedpermission.TedPermission;
 // Reference : http://bcho.tistory.com/1050
 
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -56,6 +58,14 @@ public class MainActivity extends Activity {
     ImageView star_3;
     ImageView star_4;
     ImageView star_5;
+
+    // For Live Weather
+    TextView tvLongtitude;
+    TextView tvLatitude;
+    EditText tvLat;
+    EditText tvLon;
+    Button getWeatherBtn;
+    TextView tem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,34 +140,41 @@ public class MainActivity extends Activity {
             }
         });
         // End for GPSInfo
+
+        // For Live weather
+        tvLongtitude = (TextView)findViewById(R.id.tvLongtitude);
+        tvLatitude = (TextView)findViewById(R.id.tvLatitude);
+        tvLat = (EditText)findViewById(R.id.lat);
+        tvLon = (EditText)findViewById(R.id.lon);
+        getWeatherBtn = (Button)findViewById(R.id.getWeatherBtn);
+        tem = (TextView)findViewById(R.id.tem);
+
+        getWeatherBtn.setOnClickListener(
+            new Button.OnClickListener() {
+                public void onClick(View v) {
+                    String strLon = tvLon.getText().toString();
+                    int lon = Integer.parseInt(strLon);
+
+                    String strLat = tvLat.getText().toString();
+                    int lat = Integer.parseInt(strLat);
+
+                    // 날씨를 읽어오는 API 호출
+                    OpenWeatherAPITask t = new OpenWeatherAPITask();
+                    try {
+                        Weather w = t.execute(lon,lat).get();
+
+                        TextView tem = (TextView)findViewById(R.id.tem);
+                        String temperature = String.valueOf(w.getTemperature());
+
+                        tem.setText(temperature);
+
+                    } catch(InterruptedException e) {
+                        e.printStackTrace();
+                    } catch(ExecutionException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        );
     }
-
-    // For live weather information on location
-    public void getWeather(View view) {
-        EditText tvLon = (EditText)findViewById(R.id.lon);
-        String strLon = tvLon.getText().toString();
-        int lon = Integer.parseInt(strLon);
-
-        EditText tvLat = (EditText)findViewById(R.id.lat);
-        String strLat = tvLat.getText().toString();
-        int lat = Integer.parseInt(strLat);
-
-        // 날씨를 읽어오는 API 호출
-        OpenWeatherAPITask t = new OpenWeatherAPITask();
-        try {
-            Weather w = t.execute(lon,lat).get();
-            System.out.println("Temp : " + w.getTemperature());
-
-            TextView tem = (TextView)findViewById(R.id.tem);
-            String temperature = String.valueOf(w.getTemperature());
-
-            tem.setText(temperature);
-
-        } catch(InterruptedException e) {
-            e.printStackTrace();
-        } catch(ExecutionException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
