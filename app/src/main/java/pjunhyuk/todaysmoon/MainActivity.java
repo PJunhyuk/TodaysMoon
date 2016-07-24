@@ -22,9 +22,6 @@ import com.gun0912.tedpermission.TedPermission;
 // For live weather information on location - using openweathermap api
 // Reference : http://bcho.tistory.com/1050
 
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
@@ -42,7 +39,6 @@ public class MainActivity extends Activity {
     };
 
     // For GPSInfo
-    private Button btnShowLocation;
     private TextView txtLat;
     private TextView txtLon;
     private GpsInfo gps;
@@ -60,10 +56,6 @@ public class MainActivity extends Activity {
     ImageView star_5;
 
     // For Live Weather
-    TextView tvLongtitude;
-    TextView tvLatitude;
-    EditText tvLat;
-    EditText tvLon;
     Button getWeatherBtn;
     TextView tem;
     TextView weather_main;
@@ -73,8 +65,6 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        // For live weather information on location
-        setContentView(R.layout.content_main);
 
         // For GPS Permission - Start TedPermission
         new TedPermission(this)
@@ -118,36 +108,11 @@ public class MainActivity extends Activity {
         final Animation animTwinkle2 = AnimationUtils.loadAnimation(this, R.anim.twinkle_1);
         star_2.startAnimation(animTwinkle2);
 
-        // Start for GPSInfo
-        btnShowLocation = (Button)findViewById(R.id.btn_start);
+        // For GPSInfo output
         txtLat = (TextView)findViewById(R.id.Latitude);
         txtLon = (TextView)findViewById(R.id.Longitude);
 
-        // GPS 정보를 보여주기 위한 이벤트 클래스 등록
-        btnShowLocation.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View arg0) {
-                gps = new GpsInfo(MainActivity.this);
-
-                // GPS 사용여부 가져오기
-                if(gps.isGetLocation()) {
-                    double latitude = gps.getLatitude();
-                    double longitude = gps.getLongitude();
-                    txtLat.setText(String.valueOf(latitude));
-                    txtLon.setText(String.valueOf(longitude));
-                    Toast.makeText(getApplicationContext(), "당신의 위치 - \n위도: " + latitude + "\n경도: " + longitude, Toast.LENGTH_LONG).show();
-                } else {
-                    // GPS를 사용할 수 없으므로
-                    gps.showSettingsAlert();
-                }
-            }
-        });
-        // End for GPSInfo
-
         // For Live weather
-        tvLongtitude = (TextView)findViewById(R.id.tvLongtitude);
-        tvLatitude = (TextView)findViewById(R.id.tvLatitude);
-        tvLat = (EditText)findViewById(R.id.lat);
-        tvLon = (EditText)findViewById(R.id.lon);
         getWeatherBtn = (Button)findViewById(R.id.getWeatherBtn);
         tem = (TextView)findViewById(R.id.tem);
         weather_main = (TextView)findViewById(R.id.weather_main);
@@ -156,30 +121,41 @@ public class MainActivity extends Activity {
         getWeatherBtn.setOnClickListener(
             new Button.OnClickListener() {
                 public void onClick(View v) {
-                    String strLon = tvLon.getText().toString();
-                    double lon = Double.valueOf(strLon).doubleValue();
+                    // GPS 정보를 보여주기 위한 이벤트 클래스 등록
+                    gps = new GpsInfo(MainActivity.this);
+                    // GPS 사용여부 가져오기
+                    if(gps.isGetLocation()) {
+                        double latitude = gps.getLatitude();
+                        double longitude = gps.getLongitude();
+                        txtLat.setText(String.valueOf(latitude));
+                        txtLon.setText(String.valueOf(longitude));
+//                        Toast.makeText(getApplicationContext(), "당신의 위치 - \n위도: " + latitude + "\n경도: " + longitude, Toast.LENGTH_LONG).show();
 
-                    String strLat = tvLat.getText().toString();
-                    double lat = Double.valueOf(strLat).doubleValue();
+                        double lon = latitude;
+                        double lat = longitude;
 
-                    // 날씨를 읽어오는 API 호출
-                    OpenWeatherAPITask t = new OpenWeatherAPITask();
-                    try {
-                        Weather w = t.execute(lon,lat).get();
+                        // 날씨를 읽어오는 API 호출
+                        OpenWeatherAPITask t = new OpenWeatherAPITask();
+                        try {
+                            Weather w = t.execute(lon,lat).get();
 
-                        String temperature = String.valueOf(w.getTemperature());
-                        tem.setText(temperature);
+                            String temperature = String.valueOf(w.getTemperature());
+                            tem.setText(temperature);
 
-                        String weathermain = String.valueOf(w.getWeathermain());
-                        weather_main.setText(weathermain);
+                            String weathermain = String.valueOf(w.getWeathermain());
+                            weather_main.setText(weathermain);
 
-                        String city = String.valueOf(w.getCity());
-                        textcity.setText(city);
+                            String city = String.valueOf(w.getCity());
+                            textcity.setText(city);
 
-                    } catch(InterruptedException e) {
-                        e.printStackTrace();
-                    } catch(ExecutionException e) {
-                        e.printStackTrace();
+                        } catch(InterruptedException e) {
+                            e.printStackTrace();
+                        } catch(ExecutionException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        // GPS를 사용할 수 없으므로
+                        gps.showSettingsAlert();
                     }
                 }
             }
