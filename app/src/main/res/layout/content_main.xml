@@ -193,4 +193,15 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="live-time"
+        android:id="@+id/livetime"
+        android:layout_alignTop="@+id/button_setting"
+        android:layout_toLeftOf="@+id/button_setting"
+        android:layout_toStartOf="@+id/button_setting"
+        android:layout_marginRight="30dp" />
+
 </RelativeLayout>

@@ -21,7 +21,11 @@ import com.gun0912.tedpermission.TedPermission;
 // For live weather information on location - using openweathermap api
 // Reference : http://bcho.tistory.com/1050
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends Activity {
@@ -61,6 +65,9 @@ public class MainActivity extends Activity {
     TextView weather_main;
     TextView textcity;
 
+    // For live time
+    TextView textlivetime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +82,13 @@ public class MainActivity extends Activity {
 
         // For SplashActivity
         startActivity(new Intent(this, SplashActivity.class));
+
+        // For live time
+        textlivetime = (TextView)findViewById(R.id.livetime);
+        long now = System.currentTimeMillis();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault());
+        Date date = new Date(now);
+        textlivetime.setText(dateFormat.format(date));
 
         // For Setting
         imgbutton = (ImageButton) findViewById(R.id.button_setting);
@@ -165,6 +179,12 @@ public class MainActivity extends Activity {
 
     Button.OnClickListener mClickListener = new View.OnClickListener() {
         public void onClick(View v) {
+            // For live time update
+            long now = System.currentTimeMillis();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", java.util.Locale.getDefault());
+            Date date = new Date(now);
+            textlivetime.setText(dateFormat.format(date));
+
             // GPS 정보를 보여주기 위한 이벤트 클래스 등록
             gps = new GpsInfo(MainActivity.this);
             // GPS 사용여부 가져오기
