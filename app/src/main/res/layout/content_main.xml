@@ -26,7 +26,7 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:id="@+id/moon"
-        android:background="@drawable/moon_full_yellow"
+        android:background="@drawable/moon_1_1"
         android:layout_marginTop="58dp"
         android:layout_below="@+id/button_setting"
         android:layout_centerHorizontal="true" />
@@ -168,10 +168,10 @@
         android:text="tp"
         android:textColor="#ffffff"
         android:id="@+id/tem"
-        android:layout_marginTop="89dp"
-        android:layout_below="@+id/moon"
-        android:layout_toRightOf="@+id/getWeatherBtn"
-        android:layout_toEndOf="@+id/getWeatherBtn" />
+        android:layout_marginTop="60dp"
+        android:layout_below="@+id/cloud_1"
+        android:layout_alignRight="@+id/cloud_1"
+        android:layout_alignEnd="@+id/cloud_1" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -203,5 +203,38 @@
         android:layout_toLeftOf="@+id/button_setting"
         android:layout_toStartOf="@+id/button_setting"
         android:layout_marginRight="30dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="description_3"
+        android:textColor="#ffffff"
+        android:id="@+id/description_3"
+        android:layout_marginBottom="125dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="desciption_2"
+        android:textColor="#ffffff"
+        android:id="@+id/description_2"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/description_3"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="description_1"
+        android:textColor="#ffffff"
+        android:id="@+id/description_1"
+        android:layout_marginBottom="10dp"
+        android:layout_above="@+id/description_2"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

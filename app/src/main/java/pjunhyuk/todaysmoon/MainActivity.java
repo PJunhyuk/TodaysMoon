@@ -27,6 +27,8 @@ import com.gun0912.tedpermission.TedPermission;
 // For live time
 // Reference : http://blog.opid.kr/247
 
+import org.w3c.dom.Text;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,6 +74,11 @@ public class MainActivity extends Activity {
     // For live time
     TextView textlivetime;
 
+    // For description
+    TextView textview_description_1;
+    TextView textview_description_2;
+    TextView textview_description_3;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,31 +102,49 @@ public class MainActivity extends Activity {
         String strdate = dateFormat.format(date);
         String moondate = LunarToSolarTest.convertSolarToLunar(strdate);
 
-        // For Moon
+        // For Moon & description_2
         imgmoon = (ImageView)findViewById(R.id.moon);
         imgmoon.setBackgroundResource(R.drawable.moon_1_1);
+        textview_description_2 = (TextView)findViewById(R.id.description_2);
+        textview_description_2.setText("initialization");
         int Lunarday = Integer.parseInt(moondate.substring(8, 10));
         if(Lunarday == 1) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_1);
-        }else if(Lunarday >=2 && Lunarday <= 6) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_2);
+            imgmoon.setBackgroundResource(R.drawable.moon_1_9);
+            textview_description_2.setText("초승달이");
+         }else if(Lunarday >=2 && Lunarday <= 6) {
+            imgmoon.setBackgroundResource(R.drawable.moon_1_8);
+            textview_description_2.setText("초승달이");
         }else if(Lunarday >=7 && Lunarday <= 10) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_3);
+            imgmoon.setBackgroundResource(R.drawable.moon_1_7);
+            textview_description_2.setText("상현달이");
         }else if(Lunarday >= 11 && Lunarday <= 14) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_4);
+            imgmoon.setBackgroundResource(R.drawable.moon_1_6);
+            textview_description_2.setText("상현달이");
         }else if(Lunarday == 15) {
             imgmoon.setBackgroundResource(R.drawable.moon_1_5);
+            textview_description_2.setText("보름달이");
         }else if(Lunarday >= 16 && Lunarday <= 19) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_6);
+            imgmoon.setBackgroundResource(R.drawable.moon_1_4);
+            textview_description_2.setText("하현달이");
         }else if(Lunarday >= 20 && Lunarday <= 23) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_7);
+            imgmoon.setBackgroundResource(R.drawable.moon_1_3);
+            textview_description_2.setText("하현달이");
         }else if(Lunarday >= 24 && Lunarday <= 28) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_8);
+            imgmoon.setBackgroundResource(R.drawable.moon_1_2);
+            textview_description_2.setText("그믐달이");
         }else {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_9);
+            imgmoon.setBackgroundResource(R.drawable.moon_1_1);
+            textview_description_2.setText("그믐달이");
         }
-
         textlivetime.setText(Integer.toString(Lunarday));
+
+        // For description_1
+        textview_description_1 = (TextView)findViewById(R.id.description_1);
+        textview_description_1.setText("오늘은 누구보다 밝은");
+
+        // For description_3
+        textview_description_3 = (TextView)findViewById(R.id.description_3);
+        textview_description_3.setText("그대의 남동쪽 하늘에 떠있습니다.");
 
         // For Setting
         imgbutton = (ImageButton) findViewById(R.id.button_setting);
