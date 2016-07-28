@@ -165,18 +165,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="tp"
-        android:textColor="#ffffff"
-        android:id="@+id/tem"
-        android:layout_marginTop="60dp"
-        android:layout_below="@+id/cloud_1"
-        android:layout_alignRight="@+id/cloud_1"
-        android:layout_alignEnd="@+id/cloud_1" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Weather_main"
         android:id="@+id/weather_main"
         android:layout_alignParentBottom="true"
@@ -236,5 +224,26 @@
         android:layout_marginBottom="10dp"
         android:layout_above="@+id/description_2"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="tp"
+        android:textColor="#ffffff"
+        android:textSize="25dp"
+        android:id="@+id/tem"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:id="@+id/temp_unit"
+        android:background="@drawable/temp_unit"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@+id/tem"
+        android:layout_toEndOf="@+id/tem"
+        android:layout_marginLeft="5dp" />
 
 </RelativeLayout>
