@@ -27,8 +27,8 @@
         android:layout_height="150dp"
         android:id="@+id/moon"
         android:background="@drawable/moon_1_1"
-        android:layout_marginTop="58dp"
-        android:layout_below="@+id/button_setting"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
     <ImageView
