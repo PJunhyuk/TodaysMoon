@@ -74,6 +74,9 @@ public class MainActivity extends Activity {
     ImageView star_1_1_1;
     ImageView star_1_1_2;
     ImageView star_1_1_3;
+    ImageView cloud_1_2_1;
+    ImageView cloud_1_2_2;
+    ImageView cloud_1_2_3;
 
     String weathermain;
 
@@ -150,6 +153,21 @@ public class MainActivity extends Activity {
         String strdate = dateFormat.format(date);
         String moondate = LunarToSolarTest.convertSolarToLunar(strdate);
 
+        // For other images
+        star_1_1_1 = (ImageView)findViewById(R.id.star_1_1_1);
+        star_1_1_2 = (ImageView)findViewById(R.id.star_1_1_2);
+        star_1_1_3 = (ImageView)findViewById(R.id.star_1_1_3);
+        cloud_1_2_1 = (ImageView)findViewById(R.id.cloud_1_2_1);
+        cloud_1_2_2 = (ImageView)findViewById(R.id.cloud_1_2_2);
+        cloud_1_2_3 = (ImageView)findViewById(R.id.cloud_1_2_3);
+
+        star_1_1_1.setVisibility(star_1_1_1.GONE);
+        star_1_1_2.setVisibility(star_1_1_2.GONE);
+        star_1_1_3.setVisibility(star_1_1_3.GONE);
+        cloud_1_2_1.setVisibility(cloud_1_2_1.GONE);
+        cloud_1_2_2.setVisibility(cloud_1_2_2.GONE);
+        cloud_1_2_3.setVisibility(cloud_1_2_3.GONE);
+
         // For Moon & description_2
         imgmoon = (ImageView)findViewById(R.id.moon);
         imgmoon.setBackgroundResource(R.drawable.moon_1_1);
@@ -183,6 +201,15 @@ public class MainActivity extends Activity {
         }else {
             imgmoon.setBackgroundResource(R.drawable.moon_1_1);
             textview_description_2.setText("그믐달이");
+            if(weathermain.equals("Haze")) {
+                cloud_1_2_1.setVisibility(cloud_1_2_1.VISIBLE);
+                cloud_1_2_2.setVisibility(cloud_1_2_2.VISIBLE);
+                cloud_1_2_3.setVisibility(cloud_1_2_3.VISIBLE);
+            } else {
+                star_1_1_1.setVisibility(star_1_1_1.VISIBLE);
+                star_1_1_2.setVisibility(star_1_1_2.VISIBLE);
+                star_1_1_3.setVisibility(star_1_1_3.VISIBLE);
+            }
         }
         textlivetime.setText(Integer.toString(Lunarday));
 
