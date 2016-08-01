@@ -54,15 +54,6 @@ public class MainActivity extends Activity {
 
     // Buttons
     ImageButton imgbutton;
-    ImageView cloud_1;
-    ImageView cloud_2;
-    ImageView cloud_3;
-    ImageView cloud_4;
-    ImageView star_1;
-    ImageView star_2;
-    ImageView star_3;
-    ImageView star_4;
-    ImageView star_5;
     ImageView imgmoon;
 
     // For Live Weather
@@ -79,6 +70,13 @@ public class MainActivity extends Activity {
     TextView textview_description_2;
     TextView textview_description_3;
 
+    // For other images
+    ImageView star_1_1_1;
+    ImageView star_1_1_2;
+    ImageView star_1_1_3;
+
+    String weathermain;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +91,56 @@ public class MainActivity extends Activity {
 
         // For SplashActivity
         startActivity(new Intent(this, SplashActivity.class));
+
+        // For GPSInfo output
+        txtLat = (TextView)findViewById(R.id.Latitude);
+        txtLon = (TextView)findViewById(R.id.Longitude);
+
+        // For Live weather
+        getWeatherBtn = (Button)findViewById(R.id.getWeatherBtn);
+        tem = (TextView)findViewById(R.id.tem);
+        weather_main = (TextView)findViewById(R.id.weather_main);
+        textcity = (TextView)findViewById(R.id.city);
+
+        getWeatherBtn.setOnClickListener(mClickListener);
+
+        // same as mClickListener - for auto run : start
+        // GPS 정보를 보여주기 위한 이벤트 클래스 등록
+        gps = new GpsInfo(MainActivity.this);
+        // GPS 사용여부 가져오기
+        if(gps.isGetLocation()) {
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+            txtLat.setText(String.valueOf(latitude));
+            txtLon.setText(String.valueOf(longitude));
+
+            // 날씨를 읽어오는 API 호출
+            OpenWeatherAPITask t = new OpenWeatherAPITask();
+            try {
+                Weather w = t.execute(latitude,longitude).get();
+
+                // temperature
+                String temperature = String.valueOf( Math.round(w.getTemperature()-273.15) );
+                tem.setText(temperature);
+
+                // weather
+                weathermain = String.valueOf(w.getWeathermain());
+                weather_main.setText(weathermain);
+
+                // city name
+                String city = String.valueOf(w.getCity());
+                textcity.setText(city);
+
+            } catch(InterruptedException e) {
+                e.printStackTrace();
+            } catch(ExecutionException e) {
+                e.printStackTrace();
+            }
+        } else {
+            // GPS를 사용할 수 없으므로
+            gps.showSettingsAlert();
+        }
+        // same as mClickListener - for auto run : end
 
         // For live time
         textlivetime = (TextView)findViewById(R.id.livetime);
@@ -156,77 +204,27 @@ public class MainActivity extends Activity {
             }
         });
 
-        // For cloud patrol
-        cloud_1 = (ImageView) findViewById(R.id.cloud_1);
-        final Animation animPatrol1 = AnimationUtils.loadAnimation(this, R.anim.translate_1);
-        cloud_1.startAnimation(animPatrol1);
-        cloud_2 = (ImageView) findViewById(R.id.cloud_2);
-        final Animation animPatrol2 = AnimationUtils.loadAnimation(this, R.anim.translate_2);
-        cloud_2.startAnimation(animPatrol2);
-        cloud_3 = (ImageView) findViewById(R.id.cloud_3);
-        final Animation animPatrol3 = AnimationUtils.loadAnimation(this, R.anim.translate_3);
-        cloud_3.startAnimation(animPatrol3);
-        cloud_4 = (ImageView) findViewById(R.id.cloud_4);
-        final Animation animPatrol4 = AnimationUtils.loadAnimation(this, R.anim.translate_3);
-        cloud_4.startAnimation(animPatrol4);
-
-        // For star twinkle
-        star_1 = (ImageView) findViewById(R.id.star_1);
-        final Animation animTwinkle1 = AnimationUtils.loadAnimation(this, R.anim.twinkle_1);
-        star_1.startAnimation(animTwinkle1);
-        star_2 = (ImageView) findViewById(R.id.star_2);
-        final Animation animTwinkle2 = AnimationUtils.loadAnimation(this, R.anim.twinkle_1);
-        star_2.startAnimation(animTwinkle2);
-
-        // For GPSInfo output
-        txtLat = (TextView)findViewById(R.id.Latitude);
-        txtLon = (TextView)findViewById(R.id.Longitude);
-
-        // For Live weather
-        getWeatherBtn = (Button)findViewById(R.id.getWeatherBtn);
-        tem = (TextView)findViewById(R.id.tem);
-        weather_main = (TextView)findViewById(R.id.weather_main);
-        textcity = (TextView)findViewById(R.id.city);
-
-        getWeatherBtn.setOnClickListener(mClickListener);
-
-        // same as mClickListener - for auto run : start
-        // GPS 정보를 보여주기 위한 이벤트 클래스 등록
-        gps = new GpsInfo(MainActivity.this);
-        // GPS 사용여부 가져오기
-        if(gps.isGetLocation()) {
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
-            txtLat.setText(String.valueOf(latitude));
-            txtLon.setText(String.valueOf(longitude));
-
-            // 날씨를 읽어오는 API 호출
-            OpenWeatherAPITask t = new OpenWeatherAPITask();
-            try {
-                Weather w = t.execute(latitude,longitude).get();
-
-                // temperature
-                String temperature = String.valueOf( Math.round(w.getTemperature()-273.15) );
-                tem.setText(temperature);
-
-                // weather
-                String weathermain = String.valueOf(w.getWeathermain());
-                weather_main.setText(weathermain);
-
-                // city name
-                String city = String.valueOf(w.getCity());
-                textcity.setText(city);
-
-            } catch(InterruptedException e) {
-                e.printStackTrace();
-            } catch(ExecutionException e) {
-                e.printStackTrace();
-            }
-        } else {
-            // GPS를 사용할 수 없으므로
-            gps.showSettingsAlert();
-        }
-        // same as mClickListener - for auto run : end
+//        // For cloud patrol
+//        cloud_1 = (ImageView) findViewById(R.id.cloud_1);
+//        final Animation animPatrol1 = AnimationUtils.loadAnimation(this, R.anim.translate_1);
+//        cloud_1.startAnimation(animPatrol1);
+//        cloud_2 = (ImageView) findViewById(R.id.cloud_2);
+//        final Animation animPatrol2 = AnimationUtils.loadAnimation(this, R.anim.translate_2);
+//        cloud_2.startAnimation(animPatrol2);
+//        cloud_3 = (ImageView) findViewById(R.id.cloud_3);
+//        final Animation animPatrol3 = AnimationUtils.loadAnimation(this, R.anim.translate_3);
+//        cloud_3.startAnimation(animPatrol3);
+//        cloud_4 = (ImageView) findViewById(R.id.cloud_4);
+//        final Animation animPatrol4 = AnimationUtils.loadAnimation(this, R.anim.translate_3);
+//        cloud_4.startAnimation(animPatrol4);
+//
+//        // For star twinkle
+//        star_1 = (ImageView) findViewById(R.id.star_1);
+//        final Animation animTwinkle1 = AnimationUtils.loadAnimation(this, R.anim.twinkle_1);
+//        star_1.startAnimation(animTwinkle1);
+//        star_2 = (ImageView) findViewById(R.id.star_2);
+//        final Animation animTwinkle2 = AnimationUtils.loadAnimation(this, R.anim.twinkle_1);
+//        star_2.startAnimation(animTwinkle2);
     }
 
     Button.OnClickListener mClickListener = new View.OnClickListener() {
