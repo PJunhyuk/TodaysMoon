@@ -71,12 +71,13 @@ public class MainActivity extends Activity {
     TextView textview_description_3;
 
     // For other images
-    ImageView star_1_1_1;
-    ImageView star_1_1_2;
-    ImageView star_1_1_3;
-    ImageView cloud_1_2_1;
-    ImageView cloud_1_2_2;
-    ImageView cloud_1_2_3;
+    ImageView star_8_1_1;
+    ImageView star_9_1_1;
+    ImageView star_9_1_2;
+    ImageView star_9_1_3;
+    ImageView cloud_9_2_1;
+    ImageView cloud_9_2_2;
+    ImageView cloud_9_2_3;
 
     String weathermain;
 
@@ -148,61 +149,68 @@ public class MainActivity extends Activity {
         String moondate = LunarToSolarTest.convertSolarToLunar(strdate);
 
         // For other images
-        star_1_1_1 = (ImageView)findViewById(R.id.star_1_1_1);
-        star_1_1_2 = (ImageView)findViewById(R.id.star_1_1_2);
-        star_1_1_3 = (ImageView)findViewById(R.id.star_1_1_3);
-        cloud_1_2_1 = (ImageView)findViewById(R.id.cloud_1_2_1);
-        cloud_1_2_2 = (ImageView)findViewById(R.id.cloud_1_2_2);
-        cloud_1_2_3 = (ImageView)findViewById(R.id.cloud_1_2_3);
+        star_8_1_1 = (ImageView)findViewById(R.id.star_8_1_1);
+        star_9_1_1 = (ImageView)findViewById(R.id.star_9_1_1);
+        star_9_1_2 = (ImageView)findViewById(R.id.star_9_1_2);
+        star_9_1_3 = (ImageView)findViewById(R.id.star_9_1_3);
+        cloud_9_2_1 = (ImageView)findViewById(R.id.cloud_9_2_1);
+        cloud_9_2_2 = (ImageView)findViewById(R.id.cloud_9_2_2);
+        cloud_9_2_3 = (ImageView)findViewById(R.id.cloud_9_2_3);
 
-        star_1_1_1.setVisibility(star_1_1_1.GONE);
-        star_1_1_2.setVisibility(star_1_1_2.GONE);
-        star_1_1_3.setVisibility(star_1_1_3.GONE);
-        cloud_1_2_1.setVisibility(cloud_1_2_1.GONE);
-        cloud_1_2_2.setVisibility(cloud_1_2_2.GONE);
-        cloud_1_2_3.setVisibility(cloud_1_2_3.GONE);
+        star_8_1_1.setVisibility(star_8_1_1.GONE);
+        star_9_1_1.setVisibility(star_9_1_1.GONE);
+        star_9_1_2.setVisibility(star_9_1_2.GONE);
+        star_9_1_3.setVisibility(star_9_1_3.GONE);
+        cloud_9_2_1.setVisibility(cloud_9_2_1.GONE);
+        cloud_9_2_2.setVisibility(cloud_9_2_2.GONE);
+        cloud_9_2_3.setVisibility(cloud_9_2_3.GONE);
 
         // For Moon & description_2
         imgmoon = (ImageView)findViewById(R.id.moon);
-        imgmoon.setBackgroundResource(R.drawable.moon_1_1);
+        imgmoon.setBackgroundResource(R.drawable.moon_1_0);
         textview_description_2 = (TextView)findViewById(R.id.description_2);
         textview_description_2.setText("initialization");
         int Lunarday = Integer.parseInt(moondate.substring(8, 10));
         if(Lunarday == 1) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_9);
+            imgmoon.setBackgroundResource(R.drawable.moon_1_0);
             textview_description_2.setText("초승달이");
          }else if(Lunarday >=2 && Lunarday <= 6) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_8);
+            imgmoon.setBackgroundResource(R.drawable.moon_2_0);
             textview_description_2.setText("초승달이");
         }else if(Lunarday >=7 && Lunarday <= 10) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_7);
+            imgmoon.setBackgroundResource(R.drawable.moon_3_0);
             textview_description_2.setText("상현달이");
         }else if(Lunarday >= 11 && Lunarday <= 14) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_6);
+            imgmoon.setBackgroundResource(R.drawable.moon_4_0);
             textview_description_2.setText("상현달이");
         }else if(Lunarday == 15) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_5);
+            imgmoon.setBackgroundResource(R.drawable.moon_5_0);
             textview_description_2.setText("보름달이");
         }else if(Lunarday >= 16 && Lunarday <= 19) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_4);
+            imgmoon.setBackgroundResource(R.drawable.moon_6_0);
             textview_description_2.setText("하현달이");
         }else if(Lunarday >= 20 && Lunarday <= 23) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_3);
+            imgmoon.setBackgroundResource(R.drawable.moon_7_0);
             textview_description_2.setText("하현달이");
         }else if(Lunarday >= 24 && Lunarday <= 28) {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_2);
-            textview_description_2.setText("그믐달이");
-        }else {
-            imgmoon.setBackgroundResource(R.drawable.moon_1_1);
+            imgmoon.setBackgroundResource(R.drawable.moon_8_0);
             textview_description_2.setText("그믐달이");
             if(weathermain.equals("Haze")) {
-                cloud_1_2_1.setVisibility(cloud_1_2_1.VISIBLE);
-                cloud_1_2_2.setVisibility(cloud_1_2_2.VISIBLE);
-                cloud_1_2_3.setVisibility(cloud_1_2_3.VISIBLE);
+
             } else {
-                star_1_1_1.setVisibility(star_1_1_1.VISIBLE);
-                star_1_1_2.setVisibility(star_1_1_2.VISIBLE);
-                star_1_1_3.setVisibility(star_1_1_3.VISIBLE);
+                star_8_1_1.setVisibility(star_8_1_1.VISIBLE);
+            }
+        }else {
+            imgmoon.setBackgroundResource(R.drawable.moon_9_0);
+            textview_description_2.setText("그믐달이");
+            if(weathermain.equals("Haze")) {
+                cloud_9_2_1.setVisibility(cloud_9_2_1.VISIBLE);
+                cloud_9_2_2.setVisibility(cloud_9_2_2.VISIBLE);
+                cloud_9_2_3.setVisibility(cloud_9_2_3.VISIBLE);
+            } else {
+                star_9_1_1.setVisibility(star_9_1_1.VISIBLE);
+                star_9_1_2.setVisibility(star_9_1_2.VISIBLE);
+                star_9_1_3.setVisibility(star_9_1_3.VISIBLE);
             }
         }
         textlivetime.setText(Integer.toString(Lunarday));
