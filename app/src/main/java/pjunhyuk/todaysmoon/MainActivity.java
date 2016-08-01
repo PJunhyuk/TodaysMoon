@@ -203,7 +203,7 @@ public class MainActivity extends Activity {
         }else {
             imgmoon.setBackgroundResource(R.drawable.moon_9_0);
             textview_description_2.setText("그믐달이");
-            if(weathermain.equals("Haze")) {
+            if(weathermain.equals("Haze") || weathermain.equals("Clouds")) {
                 cloud_9_2_1.setVisibility(cloud_9_2_1.VISIBLE);
                 cloud_9_2_2.setVisibility(cloud_9_2_2.VISIBLE);
                 cloud_9_2_3.setVisibility(cloud_9_2_3.VISIBLE);
