@@ -95,10 +95,6 @@ public class MainActivity extends Activity {
         // For SplashActivity
         startActivity(new Intent(this, SplashActivity.class));
 
-        // For GPSInfo output
-        txtLat = (TextView)findViewById(R.id.Latitude);
-        txtLon = (TextView)findViewById(R.id.Longitude);
-
         // For Live weather
         getWeatherBtn = (Button)findViewById(R.id.getWeatherBtn);
         tem = (TextView)findViewById(R.id.tem);
@@ -114,8 +110,6 @@ public class MainActivity extends Activity {
         if(gps.isGetLocation()) {
             double latitude = gps.getLatitude();
             double longitude = gps.getLongitude();
-            txtLat.setText(String.valueOf(latitude));
-            txtLon.setText(String.valueOf(longitude));
 
             // 날씨를 읽어오는 API 호출
             OpenWeatherAPITask t = new OpenWeatherAPITask();
